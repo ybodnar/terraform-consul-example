@@ -74,16 +74,16 @@ resource "aws_instance" "consul" {
   }
 
   provisioner "file" {
-      source      = "consul/consul.d"
-      destination = "/etc"
+      source      = "consul/consul.d/config.json"
+      destination = "/etc/consul.d/config.json"
   }
 
   provisioner "file" {
       source      = "aws_conf.sh"
-      destination = "/home/ubuntu/aws_conf.sh"
+      destination = "/etc/consul.d/aws_conf.sh"
   }
 
   provisioner "local-exec" {
-    command = "source aws_conf.sh ; consul agent ${count.index == 0 ? "-server" : ""} -config-dir=/etc/consul.d"
+    command = "source /etc/consul.d/aws_conf.sh ; consul agent ${count.index == 0 ? "-server" : ""} -config-dir=/etc/consul.d"
   }
 }
