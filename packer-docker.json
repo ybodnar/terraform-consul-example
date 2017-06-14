@@ -1,0 +1,21 @@
+{
+  "variables": {
+  },
+  "provisioners": [{
+   "type": "shell",
+   "inline": [
+     "echo Hey!"
+   ]
+ }],
+  "builders":[{
+  "type": "docker",
+  "image": "ubuntu",
+  "export_path":"docker.tar"  
+}],
+"post-processors":[{
+  "type": "docker-import",
+  "repository": "yb/packer",
+  "tag": "0.7"
+}]
+
+}

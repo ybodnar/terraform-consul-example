@@ -1,0 +1,4 @@
+terraform.tfstate.backup
+terraform.tfstate
+aws_conf.sh
+consul/consul.d/config.json

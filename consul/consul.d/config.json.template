@@ -1,0 +1,9 @@
+{
+    "data_dir": "/tmp/consul",
+    "retry_join_ec2": {
+      "secret_access_key": "",
+      "access_key_id": "",
+      "tag_key": "ybhashi_cluster",
+      "tag_value": "demo1"
+    }
+}

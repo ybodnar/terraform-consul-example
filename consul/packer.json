@@ -1,0 +1,33 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY_ID`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_ACCESS_KEY`}}",
+    "aws_subnet_id": "{{env `AWS_PACKER_SUBNET_ID`}}",
+    "aws_security_group_id": "{{env `AWS_PACKER_SEC_GROUP_ID`}}",
+    "aws_source_ami": "{{env `AWS_PACKER_SOURCE_AMI`}}"
+  },
+  "provisioners": [{
+   "type": "shell",
+   "inline": [
+     "sudo apt-get install unzip",
+     "curl -O https://releases.hashicorp.com/consul/0.8.4/consul_0.8.4_linux_386.zip",
+     "unzip consul_0.8.4_linux_386.zip",
+     "sudo mv consul /usr/local/bin/",
+     "sudo mkdir /etc/consul.d"
+   ]
+ }],
+  "builders": [
+    {
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-east-1",
+    "source_ami": "{{user `aws_source_ami`}}",
+    "instance_type": "t2.micro",
+    "ssh_username": "ubuntu",
+    "ami_name": "packer-example {{timestamp}}",
+    "subnet_id": "{{user `aws_subnet_id`}}",
+    "security_group_id": "{{user `aws_security_group_id`}}"
+  }
+]
+}
