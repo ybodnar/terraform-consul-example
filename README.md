@@ -1,4 +1,4 @@
-# Project Title
+# Consul via Packer + Terraform at AWS example
 
 Example of Consul cluster provisioning in AWS using Hashicorp's Terraform and Packer
 
